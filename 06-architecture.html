@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="zh-Hans" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>架构视角 · Deck 06 · Zero-Perspective-Slides</title>
+  <meta name="description" content="RAG 让知识从参数化变成按需加载:引用、可追溯、可治理 —— 但它没改变模型上限。" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%230a0e1a'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-family='monospace' font-size='32' font-weight='700' fill='%23ff2bd6'%3EP%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="assets/css/style-tech.css" />
+</head>
+<body>
+
+<div class="deck">
+
+  <header class="deck-topbar">
+    <div class="deck-topbar__brand">
+      <span class="dot"></span>
+      <span>Perspectives / Deck 06</span>
+    </div>
+    <div class="deck-topbar__counter">
+      <span class="now">01</span>
+      <span class="total">/10</span>
+    </div>
+  </header>
+  <div class="deck-progress"><div class="deck-progress__fill"></div></div>
+
+  <!-- ================= Slide 1: Cover ================= -->
+  <section class="slide slide--cover active">
+    <span class="corner-deco tl"></span>
+    <span class="corner-deco tr"></span>
+    <span class="corner-deco bl"></span>
+    <span class="corner-deco br"></span>
+    <div class="slide__inner">
+      <h1 class="slide__title"><span class="accent">架构</span> 视角</h1>
+      <p class="slide__subtitle">The Lens of Architecture · Deck 06 of 06</p>
+      <p class="slide__subtitle" style="margin-top: 1.5rem; color: var(--t-text-faint); font-size: 0.9rem; max-width: 640px;">
+        从知识的版本、引用、按需加载,<br>看 RAG 改变了什么、没改变什么。
+      </p>
+      <div class="slide__meta">
+        <span>Zero · 2026</span>
+        <span>Vol.I · Lenses</span>
+        <span>10 Slides</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Slide 2: Problem ================= -->
+  <section class="slide">
+    <div class="slide__inner">
+      <div class="slide__header">
+        <div class="slide__eyebrow">Problem · 一个朴素的问题</div>
+        <h2 class="slide__title">模型"知道"的事是<em style="color:var(--t-magenta)">有限的</em></h2>
+      </div>
+      <div class="slide__body">
+        <p>它的训练数据截止那一刻为止。</p>
+        <p>而且它在那些事上的记忆也是<strong>压缩的、扭曲的</strong> —— 参数量是有限的。</p>
+        <p style="margin-top: 1.5rem; font-size: 1.1rem; color: var(--t-text-soft);">
+          一个朴素的问题:模型<em>不知道</em>的东西越来越多,<em>记错</em>的东西也在增长。
+        </p>
+        <p style="margin-top: 1.5rem; padding: 1rem 1.2rem; background: var(--t-bg-soft); border-left: 3px solid var(--t-cyan); font-size: 1rem; color: var(--t-text-soft);">
+          RAG 的回应很直接:
+          <strong style="color:var(--t-cyan); font-size: 1.05rem;">别让模型什么都记,让它在需要的时候去查</strong>。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Slide 3: Definition ================= -->
+  <section class="slide slide--statement">
+    <div class="slide__inner">
+      <div class="slide__header" style="margin-bottom: 1.5rem;">
+        <div class="slide__eyebrow">Definition · 定义</div>
+      </div>
+      <p class="statement" style="font-size: clamp(1.7rem, 3.2vw, 2.5rem);">
+        RAG 把"知识"<br>
+        从<span class="hl-cyan">模型参数里</span><br>
+        搬到了<span class="hl-mag">外部存储</span>里。
+      </p>
+      <p class="statement" style="font-size: clamp(1.3rem, 2.2vw, 1.7rem); margin-top: 2.5rem; color: var(--t-text-soft);">
+        模型的注意力被"按需支付"在真正相关的知识上 ——<br>
+        而不是把所有可能性塞进上下文窗口。
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= Slide 4: Three states - compare ================= -->
+  <section class="slide slide--compare">
+    <div class="slide__inner">
+      <div class="slide__header">
+        <div class="slide__eyebrow">Three States · 知识的三种状态</div>
+        <h2 class="slide__title">RAG 让知识有了<span class="hl-cyan">第三种状态</span></h2>
+      </div>
+      <div class="compare-grid">
+        <div class="compare-card">
+          <h3>// S1 · 参数化记忆</h3>
+          <p style="font-size: 0.95rem; color: var(--t-text-soft);">在模型权重里</p>
+          <p style="color: var(--t-cyan); margin-top: 0.8rem; font-family: var(--t-mono); font-size: 0.9rem;">
+            快 · 模糊 · 难改
+          </p>
+        </div>
+        <div class="compare-card mag">
+          <h3>// S2 · 上下文窗口</h3>
+          <p style="font-size: 0.95rem; color: var(--t-text-soft);">在当前 prompt 里</p>
+          <p style="color: var(--t-magenta); margin-top: 0.8rem; font-family: var(--t-mono); font-size: 0.9rem;">
+            精确 · 有上限 · 易失
+          </p>
+        </div>
+        <div class="compare-card lime">
+          <h3>// S3 · 外部知识库 ← NEW</h3>
+          <p style="font-size: 0.95rem; color: var(--t-text-soft);">在 RAG 后端</p>
+          <p style="color: var(--t-lime); margin-top: 0.8rem; font-family: var(--t-mono); font-size: 0.9rem;">
+            无限 · 可改 · 可治理
+          </p>
+        </div>
+        <div class="compare-card amber">
+          <h3>// 这是范式变化</h3>
+          <p>原来只有前两种;现在有了第三种。</p>
+          <p style="margin-top: 0.8rem; font-family: var(--t-mono); font-size: 0.9rem;">
+            S3 会<span style="color: var(--t-amber);">越来越主导</span>。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Slide 5: Citation quote ================= -->
+  <section class="slide slide--quote">
+    <div class="slide__inner">
+      <div class="quote-mark">"</div>
+      <blockquote>
+        可追溯,等于<span style="color: var(--t-cyan);">可证伪</span>。<br>
+        可证伪,等于<span style="color: var(--t-magenta);">可信任</span>。
+      </blockquote>
+      <p class="cite" style="color: var(--t-lime);">— Citation · RAG 最大的隐性收益</p>
+      <p style="margin-top: 2.5rem; font-size: 1rem; color: var(--t-text-soft); max-width: 700px; text-align: center; line-height: 1.7;">
+        但这是有代价的:你的知识库<strong>必须可治理</strong> ——<br>
+        来源要可信 / 版本要可追 / 访问要可控。
+      </p>
+      <p style="margin-top: 1.5rem; font-family: var(--t-mono); color: var(--t-amber); font-size: 0.95rem; text-align: center;">
+        一份被污染的知识库,会让模型系统性地胡说八道。
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= Slide 6: Runtime - diagram ================= -->
+  <section class="slide slide--diagram">
+    <div class="slide__inner">
+      <div class="slide__header">
+        <div class="slide__eyebrow">Pipeline · 按需加载的工程</div>
+        <h2 class="slide__title">RAG 是<em style="color:var(--t-magenta)">按需加载</em>的极致实现</h2>
+      </div>
+      <div class="diagram" style="padding: 1.8rem;">
+        <div class="diagram-row">
+          <span class="diagram-node">用户问</span>
+          <span class="diagram-arrow">→</span>
+          <span class="diagram-node lime">改写 query</span>
+          <span class="diagram-arrow">→</span>
+          <span class="diagram-node">向量检索</span>
+          <span class="diagram-arrow">→</span>
+          <span class="diagram-node mag">重排</span>
+        </div>
+        <div class="diagram-row">
+          <span class="diagram-arrow">↳</span>
+          <span class="diagram-node amber">top-k 文档</span>
+          <span class="diagram-arrow">→</span>
+          <span class="diagram-node">拼进 prompt</span>
+          <span class="diagram-arrow">→</span>
+          <span class="diagram-node lime">模型生成</span>
+        </div>
+      </div>
+      <p style="margin-top: 1.8rem; font-family: var(--t-mono); color: var(--t-text-soft); font-size: 0.85rem; text-align: center; letter-spacing: 0.15em;">
+        改写 · embedding · chunking · reranking · 压缩 · citation
+      </p>
+      <p style="margin-top: 1rem; font-family: var(--t-mono); color: var(--t-cyan); font-size: 0.95rem; text-align: center;">
+        每一步都是一个独立的优化空间,都有自己的坑和论文。
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= Slide 7: What RAG doesn't change ================= -->
+  <section class="slide slide--bullets">
+    <div class="slide__inner">
+      <div class="slide__header">
+        <div class="slide__eyebrow">Limit · RAG 没改变什么</div>
+        <h2 class="slide__title">实话时间</h2>
+      </div>
+      <ul class="bullet-list">
+        <li>
+          <div class="num">×</div>
+          <div>
+            <div class="title">RAG <em style="color:var(--t-magenta)">没改变</em>模型本身的智能上限</div>
+            <div class="desc">该胡说的地方,RAG 也救不了;本来就不会的推理,RAG 也教不会。</div>
+          </div>
+        </li>
+        <li>
+          <div class="num">×</div>
+          <div>
+            <div class="title">它改变的是 <em style="color:var(--t-magenta)">表现</em>,不是 <em style="color:var(--t-magenta)">智能</em></div>
+            <div class="desc">在特定任务上的表现、对新鲜事物的响应速度、可治理性 —— 这些是"工程层面"的改进。</div>
+          </div>
+        </li>
+        <li>
+          <div class="num">×</div>
+          <div>
+            <div class="title">RAG 是 <em style="color:var(--t-magenta)">脚手架</em>,不是 <em style="color:var(--t-magenta)">地基</em></div>
+            <div class="desc">地基还是模型的预训练 + 推理能力。脚手架再好,墙还是会倒。</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================= Slide 8: 3-layer stack - stats ================= -->
+  <section class="slide slide--stats">
+    <div class="slide__inner">
+      <div class="slide__header">
+        <div class="slide__eyebrow">3-Layer Stack · 三层架构</div>
+        <h2 class="slide__title">未来三年的标准 stack</h2>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="value">L1<br>Model</div>
+          <div class="label">// 通用智能</div>
+          <div class="note">负责"会做" —— 推理、生成、对话</div>
+        </div>
+        <div class="stat-card mag">
+          <div class="value">L2<br>RAG</div>
+          <div class="label">// 事实与新鲜度</div>
+          <div class="note">负责"对的" —— 引用、可追溯、可治理</div>
+        </div>
+        <div class="stat-card lime">
+          <div class="value">L3<br>Workflow</div>
+          <div class="label">// 稳定可重复</div>
+          <div class="note">负责"稳定" —— Agent / Skill / SOP</div>
+        </div>
+        <div class="stat-card amber">
+          <div class="value">stack</div>
+          <div class="label">// 合在一起</div>
+          <div class="note">当一个 stack 来设计 / 运维 / 治理</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Slide 9: Judgment ================= -->
+  <section class="slide slide--statement">
+    <div class="slide__inner">
+      <div class="slide__header" style="margin-bottom: 1.5rem;">
+        <div class="slide__eyebrow">Judgment · 一个判断</div>
+      </div>
+      <p class="statement" style="font-size: clamp(1.5rem, 2.8vw, 2.2rem);">
+        把这<span class="hl-cyan">三层当一个 stack</span>来设计、来运维、来治理,<br>
+        会变成<span class="hl-mag">Agent 时代最基本的工程素养</span>。
+      </p>
+      <p class="statement" style="font-size: clamp(1.2rem, 2.2vw, 1.7rem); margin-top: 2.5rem; color: var(--t-text-soft);">
+        缺任何一层,系统都会在某个时刻崩。<br>
+        顺序错,会更早崩。
+      </p>
+      <p style="margin-top: 2.5rem; font-family: var(--t-mono); color: var(--t-lime); font-size: 0.9rem; letter-spacing: 0.2em;">
+        Model + RAG + Workflow = The Stack
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= Slide 10: Outro ================= -->
+  <section class="slide slide--outro">
+    <div class="slide__inner">
+      <div class="thanks">END · ALL 06</div>
+      <p class="signoff">架构视角 · 第一卷 · 第六章 · 一卷终</p>
+      <p style="margin-top: 2.5rem; font-family: var(--t-mono); color: var(--t-text-soft); font-size: 0.95rem; letter-spacing: 0.05em;">
+        六副镜片已集齐 · 第二卷(方法)敬请期待
+      </p>
+      <p style="margin-top: 2rem;">
+        <a href="index.html" style="color: var(--t-cyan); border-bottom: 1px dotted var(--t-cyan); font-family: var(--t-mono); font-size: 0.95rem;">← Back to All Decks</a>
+      </p>
+      <div class="nav-hint" style="margin-top: 2rem;">
+        <kbd>←</kbd> <kbd>→</kbd> 翻页 · 谢谢
+      </div>
+    </div>
+  </section>
+
+  <nav class="deck-nav">
+    <div class="deck-nav__btns">
+      <button class="deck-nav__btn" data-nav="first" disabled>« First</button>
+      <button class="deck-nav__btn" data-nav="prev" disabled>‹ Prev</button>
+    </div>
+    <div class="deck-nav__hint"><kbd>←</kbd> <kbd>→</kbd> <kbd>Space</kbd> 翻页</div>
+    <div class="deck-nav__btns">
+      <button class="deck-nav__btn" data-nav="next">Next ›</button>
+      <button class="deck-nav__btn" data-nav="last">Last »</button>
+    </div>
+  </nav>
+
+</div>
+
+<script src="assets/js/deck.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="zh-Hans" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>拓扑学视角 · Deck 04 · Zero-Perspective-Slides</title>
+  <meta name="description" content="把 Agent 协作画成图:Pipeline / Fan-out / Hub / Mesh / Loop —— 拓扑决定性质。" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%230a0e1a'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-family='monospace' font-size='32' font-weight='700' fill='%23ffb547'%3EP%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="assets/css/style-tech.css" />
+</head>
+<body>
+
+<div class="deck">
+
+  <header class="deck-topbar">
+    <div class="deck-topbar__brand">
+      <span class="dot"></span>
+      <span>Perspectives / Deck 04</span>
+    </div>
+    <div class="deck-topbar__counter">
+      <span class="now">01</span>
+      <span class="total">/10</span>
+    </div>
+  </header>
+  <div class="deck-progress"><div class="deck-progress__fill"></div></div>
+
+  <!-- ================= Slide 1: Cover ================= -->
+  <section class="slide slide--cover active">
+    <span class="corner-deco tl"></span>
+    <span class="corner-deco tr"></span>
+    <span class="corner-deco bl"></span>
+    <span class="corner-deco br"></span>
+    <div class="slide__inner">
+      <h1 class="slide__title"><span class="accent">拓扑学</span> 视角</h1>
+      <p class="slide__subtitle">The Lens of Topology · Deck 04 of 06</p>
+      <p class="slide__subtitle" style="margin-top: 1.5rem; color: var(--t-text-faint); font-size: 0.9rem; max-width: 640px;">
+        把 Agent 协作画成图,<br>看串行、并行、投票、监督背后的组织哲学。
+      </p>
+      <div class="slide__meta">
+        <span>Zero · 2026</span>
+        <span>Vol.I · Lenses</span>
+        <span>10 Slides</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Slide 2: Why graph ================= -->
+  <section class="slide">
+    <div class="slide__inner">
+      <div class="slide__header">
+        <div class="slide__eyebrow">Why Graph · 别看代码看图</div>
+        <h2 class="slide__title">假设你面前有 <em style="color:var(--t-cyan)">N</em> 个 agent</h2>
+      </div>
+      <div class="slide__body">
+        <p>每个 agent 会调一些工具、读一些上下文、产出一些中间结果。</p>
+        <p>你想理解它们怎么合作 ——</p>
+        <p style="font-size: 1.5rem; color: var(--t-magenta); font-family: var(--t-display); margin: 1.5rem 0;">
+          别看代码,<strong>看图</strong>。
+        </p>
+        <p>节点是 agent 或工具,边是"调用 / 读 / 写"。</p>
+        <p>几乎所有 multi-agent 系统都可以归到下面几种<strong>基本拓扑</strong>上。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Slide 3: Five topologies - diagram ================= -->
+  <section class="slide slide--diagram">
+    <div class="slide__inner">
+      <div class="slide__header">
+        <div class="slide__eyebrow">5 Topologies · 五种基本型</div>
+        <h2 class="slide__title">Agent 协作的<em style="color:var(--t-magenta)">基本型</em></h2>
+      </div>
+      <div class="diagram" style="padding: 1.5rem;">
+        <div class="diagram-row">
+          <span class="diagram-node">A</span>
+          <span class="diagram-arrow">→</span>
+          <span class="diagram-node">B</span>
+          <span class="diagram-arrow">→</span>
+          <span class="diagram-node">C</span>
+          <span style="margin-left: 1.5rem; color: var(--t-text-faint); font-size: 0.85rem;">Pipeline · 线性串行</span>
+        </div>
+        <div class="diagram-row">
+          <span class="diagram-node">Boss</span>
+          <span class="diagram-arrow">↗</span>
+          <span class="diagram-node lime">W1</span>
+          <span class="diagram-arrow">↗</span>
+          <span class="diagram-node lime">W2</span>
+          <span class="diagram-arrow">↗</span>
+          <span class="diagram-node lime">W3</span>
+          <span style="margin-left: 1.5rem; color: var(--t-text-faint); font-size: 0.85rem;">Fan-out · 一拖多</span>
+        </div>
+        <div class="diagram-row">
+          <span class="diagram-node lime">W1</span>
+          <span class="diagram-arrow">↘</span>
+          <span class="diagram-node">Hub</span>
+          <span class="diagram-arrow">↙</span>
+          <span class="diagram-node lime">W2</span>
+          <span class="diagram-arrow">↘</span>
+          <span class="diagram-node lime">W3</span>
+          <span style="margin-left: 1.5rem; color: var(--t-text-faint); font-size: 0.85rem;">Hub · 调度 + 周围 worker</span>
+        </div>
+        <div class="diagram-row">
+          <span class="diagram-node lime">A</span>
+          <span class="diagram-arrow">⇄</span>
+          <span class="diagram-node mag">B</span>
+          <span class="diagram-arrow">⇄</span>
+          <span class="diagram-node lime">C</span>
+          <span style="margin-left: 1.5rem; color: var(--t-text-faint); font-size: 0.85rem;">Mesh · 互相可调(最乱)</span>
+        </div>
+        <div class="diagram-row">
+          <span class="diagram-node amber">step 1</span>
+          <span class="diagram-arrow">→</span>
+          <span class="diagram-node amber">step 2</span>
+          <span class="diagram-arrow">↺</span>
+          <span class="diagram-node amber">step 1</span>
+          <span style="margin-left: 1.5rem; color: var(--t-text-faint); font-size: 0.85rem;">Loop · 自己审自己</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Slide 4: Core insight - quote ================= -->
+  <section class="slide slide--quote">
+    <div class="slide__inner">
+      <div class="quote-mark">"</div>
+      <blockquote>
+        拓扑不是装饰。<br>
+        它决定<span style="color: var(--t-cyan); text-shadow: 0 0 30px rgba(0,240,255,0.5);">系统</span>的性质。
+      </blockquote>
+      <p class="cite">— Core Insight · 拓扑决定性质</p>
+      <p style="margin-top: 2.5rem; font-size: 1.1rem; color: var(--t-text-soft); max-width: 760px; text-align: center; line-height: 1.7;">
+        同样的 agent 能力,放在不同的拓扑里,<br>会做出<span style="color: var(--t-magenta);">完全不同的系统</span>。
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= Slide 5: Properties compare ================= -->
+  <section class="slide slide--compare">
+    <div class="slide__inner">
+      <div class="slide__header">
+        <div class="slide__eyebrow">Properties · 拓扑与性质</div>
+        <h2 class="slide__title">同样的 agent,不同的代价</h2>
+      </div>
+      <div class="compare-grid">
+        <div class="compare-card">
+          <h3>// Pipeline</h3>
+          <p>可控、稳定、易调试</p>
+          <p style="color: var(--t-magenta); margin-top: 0.6rem; font-family: var(--t-mono); font-size: 0.9rem;">
+            代价:串行延迟 = 各环节延迟之和
+          </p>
+        </div>
+        <div class="compare-card mag">
+          <h3>// Fan-out</h3>
+          <p>快(并行)、可对比(多视角)</p>
+          <p style="color: var(--t-magenta); margin-top: 0.6rem; font-family: var(--t-mono); font-size: 0.9rem;">
+            代价:成本 = N 倍
+          </p>
+        </div>
+        <div class="compare-card lime">
+          <h3>// Loop(反思)</h3>
+          <p>质量高(自我修正)</p>
+          <p style="color: var(--t-magenta); margin-top: 0.6rem; font-family: var(--t-mono); font-size: 0.9rem;">
+            代价:不可预测完成时间,可能死循环
+          </p>
+        </div>
+        <div class="compare-card amber">
+          <h3>// Mesh</h3>
+          <p>最灵活</p>
+          <p style="color: var(--t-magenta); margin-top: 0.6rem; font-family: var(--t-mono); font-size: 0.9rem;">
+            代价:调试地狱、状态爆炸
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Slide 6: Supervision - bullets ================= -->
+  <section class="slide slide--bullets">
+    <div class="slide__inner">
+      <div class="slide__header">
+        <div class="slide__eyebrow">Supervision · 监督关系的拓扑</div>
+        <h2 class="slide__title">组织学的<em style="color:var(--t-magenta)">老问题</em>,新版本</h2>
+      </div>
+      <ul class="bullet-list">
+        <li>
+          <div class="num">01</div>
+          <div>
+            <div class="title">监督关系画出来是<em style="color:var(--t-magenta)">树</em></div>
+            <div class="desc">每个节点最多一个父,但可以有多个子。换成人:每个员工一个老板,可以管多人。</div>
+          </div>
+        </li>
+        <li>
+          <div class="num">02</div>
+          <div>
+            <div class="title">层级数 = 0(Mesh)→ 乱</div>
+            <div class="desc">没人拍板,谁都能调谁。在人类社会这叫"无政府",在 agent 系统这叫"调试噩梦"。</div>
+          </div>
+        </li>
+        <li>
+          <div class="num">03</div>
+          <div>
+            <div class="title">监督者是否<em style="color:var(--t-magenta)">同质</em></div>
+            <div class="desc">同质 → 容易被群体偏见带偏;异质 → 慢但稳。组织管理学的核心矛盾,搬进了 agent 系统。</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================= Slide 7: Voting ================= -->
+  <section class="slide slide--stats">
+    <div class="slide__inner">
+      <div class="slide__header">
+        <div class="slide__eyebrow">Voting · 民主的拓扑</div>
+        <h2 class="slide__title">让 N 个 agent 独立出方案</h2>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="value">去<br>相关</div>
+          <div class="label">去相关性</div>
+          <div class="note">不同 prompt / 不同样本 → 不同错误模式</div>
+        </div>
+        <div class="stat-card mag">
+          <div class="value">覆<br>盖</div>
+          <div class="label">覆盖性</div>
+          <div class="note">多视角合起来比单一视角更全</div>
+        </div>
+        <div class="stat-card lime">
+          <div class="value">自<br>校准</div>
+          <div class="label">自我校准</div>
+          <div class="note">多数派往往比极端派更接近真相</div>
+        </div>
+        <div class="stat-card amber">
+          <div class="value">3x<br>代价</div>
+          <div class="label">它的代价</div>
+          <div class="note">贵(N 倍 token)、慢(N 倍)、可能"多数派暴政"</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Slide 8: Don't overcomplicate ================= -->
+  <section class="slide slide--quote">
+    <div class="slide__inner">
+      <div class="quote-mark alt">!</div>
+      <blockquote style="font-size: clamp(1.5rem, 2.8vw, 2.2rem);">
+        拓扑的复杂度,<br>
+        不应该超过任务的<span style="color: var(--t-magenta);">本质复杂度</span>。
+      </blockquote>
+      <p class="cite" style="color: var(--t-cyan);">— 一句话能讲清楚的事,就别开董事会</p>
+      <p style="margin-top: 2rem; font-family: var(--t-mono); color: var(--t-amber); font-size: 0.95rem; letter-spacing: 0.05em;">
+        见过太多"为了 multi-agent 而 multi-agent":<br>
+        延迟涨 4 倍 / token 涨 6 倍 / 质量涨 5%。
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= Slide 9: Judgment ================= -->
+  <section class="slide slide--statement">
+    <div class="slide__inner">
+      <div class="slide__header" style="margin-bottom: 1.5rem;">
+        <div class="slide__eyebrow">Judgment · 一个判断</div>
+      </div>
+      <p class="statement" style="font-size: clamp(1.6rem, 3vw, 2.4rem);">
+        我赌:2026-2027 年<br>
+        会有一波<span class="hl-cyan">"拓扑学复兴"</span>。
+      </p>
+      <p class="statement" style="font-size: clamp(1.2rem, 2.2vw, 1.7rem); margin-top: 2rem; color: var(--t-text-soft);">
+        大家会发现,multi-agent 的真正难点
+      </p>
+      <p class="statement" style="font-size: clamp(1.5rem, 2.6vw, 2rem);">
+        不是 <span class="hl-mag">prompt</span>,而是<span class="hl-lime">图</span>。
+      </p>
+      <p style="margin-top: 2.5rem; font-family: var(--t-mono); color: var(--t-text-faint); font-size: 0.85rem; letter-spacing: 0.15em;">
+        Agent Design Patterns · 编排可视化 · 组织行为学搬进 agent
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= Slide 10: Outro ================= -->
+  <section class="slide slide--outro">
+    <div class="slide__inner">
+      <div class="thanks">END · DECK 04</div>
+      <p class="signoff">拓扑学视角 · 第一卷 · 第四章</p>
+      <p style="margin-top: 2.5rem; font-family: var(--t-mono); color: var(--t-text-soft); font-size: 0.95rem; letter-spacing: 0.1em;">
+        下一个镜片: <a href="05-relation.html" style="color: var(--t-cyan); border-bottom: 1px dotted var(--t-cyan);">关系视角 →</a>
+      </p>
+      <div class="nav-hint">
+        <kbd>←</kbd> <kbd>→</kbd> 翻页 · <a href="index.html" style="color: var(--t-magenta); border-bottom: 1px dotted var(--t-magenta);">回到索引</a>
+      </div>
+    </div>
+  </section>
+
+  <nav class="deck-nav">
+    <div class="deck-nav__btns">
+      <button class="deck-nav__btn" data-nav="first" disabled>« First</button>
+      <button class="deck-nav__btn" data-nav="prev" disabled>‹ Prev</button>
+    </div>
+    <div class="deck-nav__hint"><kbd>←</kbd> <kbd>→</kbd> <kbd>Space</kbd> 翻页</div>
+    <div class="deck-nav__btns">
+      <button class="deck-nav__btn" data-nav="next">Next ›</button>
+      <button class="deck-nav__btn" data-nav="last">Last »</button>
+    </div>
+  </nav>
+
+</div>
+
+<script src="assets/js/deck.js" defer></script>
+</body>
+</html>

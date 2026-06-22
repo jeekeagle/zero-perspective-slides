@@ -1,0 +1,691 @@
+/* ============================================================
+   Zero-Perspective-Slides · 科技风 HTML PPT
+   ------------------------------------------------------------
+   与 book(羊皮纸/酒红/烫金)与 hub(墨韵/宣纸/朱砂)刻意区分:
+   - 深空底色 + 霓虹辉光 + 网格扫描 + 终端字
+   - 字体:JetBrains Mono / Space Grotesk / Inter
+   - 配色:Cyan #00f0ff + Magenta #ff00aa + Lime #aaff00
+   - 翻页:键盘 ← → Space / Home End / 触屏滑动
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap");
+
+/* ---------- 变量 ---------- */
+:root {
+  --t-bg:        #0a0e1a;
+  --t-bg-soft:   #0f1424;
+  --t-panel:     #131a2c;
+  --t-line:      #1f2a44;
+  --t-line-soft: #1a2238;
+  --t-text:      #d8e4ff;
+  --t-text-soft: #7d8bb0;
+  --t-text-faint:#4a5575;
+  --t-cyan:      #00f0ff;
+  --t-magenta:   #ff2bd6;
+  --t-lime:      #b6ff3c;
+  --t-amber:     #ffb547;
+  --t-grid:      rgba(0, 240, 255, 0.06);
+  --t-glow:      0 0 24px rgba(0, 240, 255, 0.5), 0 0 60px rgba(0, 240, 255, 0.18);
+  --t-glow-mag:  0 0 24px rgba(255, 43, 214, 0.5), 0 0 60px rgba(255, 43, 214, 0.18);
+  --t-mono:      "JetBrains Mono", "SF Mono", Consolas, monospace;
+  --t-display:   "Space Grotesk", "Inter", sans-serif;
+  --t-body:      "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* ---------- Reset ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html, body {
+  margin: 0; padding: 0;
+  height: 100%;
+  overflow: hidden;
+  background: var(--t-bg);
+  color: var(--t-text);
+  font-family: var(--t-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  user-select: none;
+  cursor: default;
+}
+::selection { background: var(--t-cyan); color: var(--t-bg); }
+
+/* ---------- 全屏舞台 ---------- */
+.deck {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 20% 10%, rgba(0, 240, 255, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 90%, rgba(255, 43, 214, 0.07) 0%, transparent 50%),
+    var(--t-bg);
+}
+
+/* ---------- 背景网格 ---------- */
+.deck::before {
+  content: "";
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(var(--t-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--t-grid) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 90%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 90%);
+}
+
+/* 顶部扫描线 */
+.deck::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--t-cyan), transparent);
+  animation: scan 6s linear infinite;
+  opacity: 0.5;
+  z-index: 1;
+  pointer-events: none;
+}
+@keyframes scan {
+  0% { top: 0; opacity: 0; }
+  10% { opacity: 0.8; }
+  90% { opacity: 0.8; }
+  100% { top: 100%; opacity: 0; }
+}
+
+/* ---------- 顶部状态栏 ---------- */
+.deck-topbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 28px;
+  font-family: var(--t-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--t-text-soft);
+  border-bottom: 1px solid var(--t-line-soft);
+  background: rgba(10, 14, 26, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.deck-topbar__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--t-cyan);
+  font-weight: 600;
+  letter-spacing: 0.25em;
+}
+.deck-topbar__brand .dot {
+  width: 8px; height: 8px;
+  background: var(--t-cyan);
+  border-radius: 50%;
+  box-shadow: var(--t-glow);
+  animation: pulse 1.8s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+.deck-topbar__counter {
+  font-weight: 600;
+  color: var(--t-magenta);
+}
+.deck-topbar__counter .now { color: var(--t-text); font-size: 0.95rem; }
+.deck-topbar__counter .total { color: var(--t-text-faint); }
+
+/* 顶部 progress bar */
+.deck-progress {
+  position: fixed;
+  top: 46px; left: 0; right: 0;
+  height: 2px;
+  background: var(--t-line-soft);
+  z-index: 99;
+}
+.deck-progress__fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--t-cyan) 0%, var(--t-magenta) 100%);
+  width: 0%;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--t-glow);
+}
+
+/* ---------- Slide 容器 ---------- */
+.slide {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 60px 70px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+.slide.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+.slide__inner {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* ---------- Slide Header(章号 + 标题) ---------- */
+.slide__header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 2.2rem;
+}
+.slide__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--t-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--t-magenta);
+  font-weight: 500;
+}
+.slide__eyebrow::before {
+  content: "›";
+  color: var(--t-cyan);
+  font-weight: 700;
+}
+.slide__title {
+  font-family: var(--t-display);
+  font-size: clamp(2.4rem, 5.5vw, 4.4rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin: 0;
+  color: var(--t-text);
+}
+.slide__title .accent {
+  background: linear-gradient(90deg, var(--t-cyan), var(--t-magenta));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.slide__title code {
+  font-family: var(--t-mono);
+  font-size: 0.6em;
+  background: var(--t-panel);
+  border: 1px solid var(--t-line);
+  padding: 0.15em 0.5em;
+  border-radius: 4px;
+  color: var(--t-cyan);
+}
+.slide__subtitle {
+  font-family: var(--t-mono);
+  font-size: 1rem;
+  color: var(--t-text-soft);
+  letter-spacing: 0.02em;
+  margin: 0.2rem 0 0;
+}
+
+/* ---------- Slide Body ---------- */
+.slide__body {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  color: var(--t-text);
+}
+.slide__body p { margin: 0 0 1rem; }
+.slide__body p:last-child { margin-bottom: 0; }
+.slide__body strong {
+  color: var(--t-cyan);
+  font-weight: 600;
+}
+.slide__body em { color: var(--t-amber); font-style: normal; font-weight: 500; }
+.slide__body ul, .slide__body ol {
+  margin: 0; padding-left: 1.5rem;
+}
+.slide__body li {
+  margin-bottom: 0.6rem;
+}
+.slide__body li::marker { color: var(--t-cyan); }
+.slide__body code {
+  font-family: var(--t-mono);
+  font-size: 0.88em;
+  background: var(--t-panel);
+  border: 1px solid var(--t-line);
+  padding: 0.1em 0.4em;
+  border-radius: 3px;
+  color: var(--t-cyan);
+}
+.slide__body pre {
+  font-family: var(--t-mono);
+  background: var(--t-bg-soft);
+  border: 1px solid var(--t-line);
+  border-left: 3px solid var(--t-magenta);
+  padding: 1.2em 1.5em;
+  border-radius: 4px;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  overflow-x: auto;
+  white-space: pre;
+  color: var(--t-text);
+}
+.slide__body pre code {
+  background: none; border: none; padding: 0; color: inherit;
+}
+
+/* ---------- Cover Slide(封面) ---------- */
+.slide--cover .slide__inner { text-align: center; align-items: center; }
+.slide--cover .slide__title {
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.slide--cover .slide__title .accent {
+  background: linear-gradient(90deg, var(--t-cyan) 0%, var(--t-magenta) 50%, var(--t-lime) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.slide--cover .slide__subtitle {
+  font-size: 1.3rem;
+  color: var(--t-text-soft);
+  margin-top: 1.2rem;
+  letter-spacing: 0.04em;
+}
+.slide--cover .slide__meta {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+  font-family: var(--t-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--t-text-faint);
+}
+.slide--cover .slide__meta span:not(:last-child)::after {
+  content: "·";
+  margin-left: 1.5rem;
+  color: var(--t-cyan);
+}
+.slide--cover .corner-deco {
+  position: absolute;
+  width: 100px; height: 100px;
+  border: 1px solid var(--t-cyan);
+  opacity: 0.4;
+  z-index: 5;
+}
+.slide--cover .corner-deco.tl { top: 70px; left: 40px; border-right: none; border-bottom: none; }
+.slide--cover .corner-deco.tr { top: 70px; right: 40px; border-left: none; border-bottom: none; }
+.slide--cover .corner-deco.bl { bottom: 60px; left: 40px; border-right: none; border-top: none; }
+.slide--cover .corner-deco.br { bottom: 60px; right: 40px; border-left: none; border-top: none; }
+
+/* ---------- TOC Slide(目录) ---------- */
+.slide--toc .toc-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.2rem;
+  margin-top: 1rem;
+}
+.toc-item {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 1.2rem 1.4rem;
+  background: var(--t-bg-soft);
+  border: 1px solid var(--t-line);
+  border-left: 3px solid var(--t-cyan);
+  font-family: var(--t-mono);
+  transition: all 0.25s ease;
+}
+.toc-item:hover {
+  border-left-color: var(--t-magenta);
+  background: var(--t-panel);
+  transform: translateX(4px);
+}
+.toc-item__num {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--t-cyan);
+  font-family: var(--t-display);
+  min-width: 50px;
+}
+.toc-item__title {
+  font-size: 1.1rem;
+  color: var(--t-text);
+  font-weight: 500;
+  font-family: var(--t-display);
+}
+.toc-item__sub {
+  font-size: 0.78rem;
+  color: var(--t-text-faint);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-top: 0.25rem;
+}
+
+/* ---------- Big Statement Slide(大字观点) ---------- */
+.slide--statement .slide__inner { text-align: center; align-items: center; }
+.slide--statement .statement {
+  font-family: var(--t-display);
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.005em;
+  color: var(--t-text);
+  max-width: 1000px;
+}
+.slide--statement .statement .hl-cyan { color: var(--t-cyan); text-shadow: 0 0 30px rgba(0,240,255,0.4); }
+.slide--statement .statement .hl-mag { color: var(--t-magenta); text-shadow: 0 0 30px rgba(255,43,214,0.4); }
+.slide--statement .statement .hl-lime { color: var(--t-lime); text-shadow: 0 0 30px rgba(182,255,60,0.4); }
+.slide--statement .cite {
+  font-family: var(--t-mono);
+  font-size: 0.85rem;
+  color: var(--t-text-faint);
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin-top: 2.5rem;
+}
+
+/* ---------- Two-column Slide(对比) ---------- */
+.slide--compare .compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 0.5rem;
+}
+.compare-card {
+  padding: 1.5rem 1.8rem;
+  background: var(--t-bg-soft);
+  border: 1px solid var(--t-line);
+  border-top: 3px solid var(--t-cyan);
+  border-radius: 4px;
+}
+.compare-card.mag { border-top-color: var(--t-magenta); }
+.compare-card.lime { border-top-color: var(--t-lime); }
+.compare-card.amber { border-top-color: var(--t-amber); }
+.compare-card h3 {
+  font-family: var(--t-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--t-cyan);
+  margin: 0 0 1rem;
+  font-weight: 600;
+}
+.compare-card.mag h3 { color: var(--t-magenta); }
+.compare-card.lime h3 { color: var(--t-lime); }
+.compare-card.amber h3 { color: var(--t-amber); }
+.compare-card p, .compare-card li {
+  font-size: 1rem;
+  line-height: 1.7;
+  margin: 0 0 0.6rem;
+  color: var(--t-text);
+}
+.compare-card ul { padding-left: 1.2rem; margin: 0; }
+.compare-card li::marker { color: var(--t-cyan); }
+
+/* ---------- Diagram Slide(框图) ---------- */
+.slide--diagram .diagram {
+  margin-top: 0.5rem;
+  background: var(--t-bg-soft);
+  border: 1px solid var(--t-line);
+  border-radius: 4px;
+  padding: 2rem;
+}
+.diagram-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  font-family: var(--t-mono);
+  font-size: 0.95rem;
+}
+.diagram-node {
+  padding: 0.55rem 1.1rem;
+  background: var(--t-panel);
+  border: 1px solid var(--t-cyan);
+  color: var(--t-cyan);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  border-radius: 3px;
+  font-family: var(--t-mono);
+  font-size: 0.9rem;
+}
+.diagram-node.mag { border-color: var(--t-magenta); color: var(--t-magenta); }
+.diagram-node.lime { border-color: var(--t-lime); color: var(--t-lime); }
+.diagram-node.amber { border-color: var(--t-amber); color: var(--t-amber); }
+.diagram-arrow {
+  color: var(--t-text-faint);
+  font-family: var(--t-mono);
+}
+.diagram-row + .diagram-row { margin-top: 1rem; }
+
+/* ---------- Quote Slide ---------- */
+.slide--quote .slide__inner { text-align: center; align-items: center; }
+.slide--quote .quote-mark {
+  font-family: var(--t-display);
+  font-size: 6rem;
+  line-height: 0.5;
+  color: var(--t-cyan);
+  opacity: 0.5;
+  margin-bottom: 1rem;
+}
+.slide--quote blockquote {
+  font-family: var(--t-display);
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--t-text);
+  max-width: 1000px;
+  margin: 0 auto;
+  letter-spacing: -0.005em;
+}
+.slide--quote .quote-mark.alt { color: var(--t-magenta); opacity: 0.4; }
+
+/* ---------- Bullet Slide(要点) ---------- */
+.slide--bullets .bullet-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.slide--bullets .bullet-list li {
+  display: grid;
+  grid-template-columns: 70px 1fr;
+  gap: 1.5rem;
+  padding: 1.2rem 0;
+  border-bottom: 1px dashed var(--t-line);
+  align-items: start;
+}
+.slide--bullets .bullet-list li:last-child { border-bottom: none; }
+.slide--bullets .bullet-list .num {
+  font-family: var(--t-display);
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--t-cyan);
+  line-height: 1;
+}
+.slide--bullets .bullet-list li:nth-child(2n) .num { color: var(--t-magenta); }
+.slide--bullets .bullet-list li:nth-child(3n) .num { color: var(--t-lime); }
+.slide--bullets .bullet-list .title {
+  font-family: var(--t-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--t-text);
+  margin-bottom: 0.3rem;
+}
+.slide--bullets .bullet-list .desc {
+  font-size: 1rem;
+  color: var(--t-text-soft);
+  line-height: 1.6;
+}
+
+/* ---------- Stat Slide(数据) ---------- */
+.slide--stats .stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+}
+.stat-card {
+  padding: 1.8rem 1.5rem;
+  background: var(--t-bg-soft);
+  border: 1px solid var(--t-line);
+  border-radius: 4px;
+  text-align: left;
+}
+.stat-card .value {
+  font-family: var(--t-display);
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--t-cyan);
+  letter-spacing: -0.02em;
+}
+.stat-card.mag .value { color: var(--t-magenta); }
+.stat-card.lime .value { color: var(--t-lime); }
+.stat-card.amber .value { color: var(--t-amber); }
+.stat-card .label {
+  font-family: var(--t-mono);
+  font-size: 0.78rem;
+  color: var(--t-text-soft);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-top: 0.6rem;
+}
+.stat-card .note {
+  font-size: 0.88rem;
+  color: var(--t-text-faint);
+  margin-top: 0.4rem;
+  line-height: 1.5;
+}
+
+/* ---------- Outro Slide ---------- */
+.slide--outro .slide__inner { text-align: center; align-items: center; }
+.slide--outro .thanks {
+  font-family: var(--t-display);
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  background: linear-gradient(90deg, var(--t-cyan), var(--t-magenta));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.slide--outro .signoff {
+  font-family: var(--t-mono);
+  font-size: 0.9rem;
+  color: var(--t-text-soft);
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin-top: 1.5rem;
+}
+.slide--outro .nav-hint {
+  margin-top: 3rem;
+  font-family: var(--t-mono);
+  font-size: 0.8rem;
+  color: var(--t-text-faint);
+  letter-spacing: 0.15em;
+}
+.slide--outro .nav-hint kbd {
+  display: inline-block;
+  padding: 0.2em 0.6em;
+  background: var(--t-panel);
+  border: 1px solid var(--t-line);
+  border-radius: 3px;
+  font-family: var(--t-mono);
+  font-size: 0.85em;
+  color: var(--t-cyan);
+  margin: 0 0.2em;
+}
+
+/* ---------- 底部导航栏 ---------- */
+.deck-nav {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 28px;
+  font-family: var(--t-mono);
+  font-size: 0.72rem;
+  color: var(--t-text-soft);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border-top: 1px solid var(--t-line-soft);
+  background: rgba(10, 14, 26, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.deck-nav__btns {
+  display: flex;
+  gap: 0.6rem;
+}
+.deck-nav__btn {
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: 1px solid var(--t-line);
+  color: var(--t-text-soft);
+  font-family: var(--t-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 3px;
+}
+.deck-nav__btn:hover {
+  border-color: var(--t-cyan);
+  color: var(--t-cyan);
+}
+.deck-nav__btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+.deck-nav__btn:disabled:hover {
+  border-color: var(--t-line);
+  color: var(--t-text-soft);
+}
+.deck-nav__hint kbd {
+  display: inline-block;
+  padding: 0.15em 0.5em;
+  background: var(--t-panel);
+  border: 1px solid var(--t-line);
+  border-radius: 3px;
+  font-family: var(--t-mono);
+  font-size: 0.85em;
+  color: var(--t-cyan);
+  margin: 0 0.15em;
+}
+
+/* ---------- Responsive(小屏退化) ---------- */
+@media (max-width: 900px) {
+  .slide { padding: 70px 28px 60px; }
+  .slide__title { font-size: 2.2rem; }
+  .slide--toc .toc-grid { grid-template-columns: 1fr; }
+  .slide--compare .compare-grid { grid-template-columns: 1fr; }
+  .slide--bullets .bullet-list li { grid-template-columns: 50px 1fr; gap: 1rem; }
+  .slide--bullets .bullet-list .num { font-size: 1.6rem; }
+  .deck-topbar { padding: 10px 14px; font-size: 0.65rem; }
+  .deck-nav { padding: 10px 14px; font-size: 0.65rem; flex-wrap: wrap; gap: 0.5rem; }
+}
+@media (max-width: 600px) {
+  .slide { padding: 60px 18px 50px; }
+  .slide__title { font-size: 1.7rem; }
+  .slide__body { font-size: 0.95rem; }
+  .slide--cover .slide__title { font-size: 2.5rem; }
+  .slide--cover .slide__meta { flex-direction: column; gap: 0.3rem; }
+  .slide--cover .slide__meta span:not(:last-child)::after { display: none; }
+  .deck-progress { top: 38px; }
+}

@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="zh-Hans" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>经济学视角 · Deck 02 · Zero-Perspective-Slides</title>
+  <meta name="description" content="Skill 的零边际成本、需求分层、平台抽成 —— 看清 Agent 时代的微技能市场。" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%230a0e1a'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-family='monospace' font-size='32' font-weight='700' fill='%23ff2bd6'%3EP%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="assets/css/style-tech.css" />
+</head>
+<body>
+
+<div class="deck">
+
+  <header class="deck-topbar">
+    <div class="deck-topbar__brand">
+      <span class="dot"></span>
+      <span>Perspectives / Deck 02</span>
+    </div>
+    <div class="deck-topbar__counter">
+      <span class="now">01</span>
+      <span class="total">/10</span>
+    </div>
+  </header>
+  <div class="deck-progress"><div class="deck-progress__fill"></div></div>
+
+  <!-- ================= Slide 1: Cover ================= -->
+  <section class="slide slide--cover active">
+    <span class="corner-deco tl"></span>
+    <span class="corner-deco tr"></span>
+    <span class="corner-deco bl"></span>
+    <span class="corner-deco br"></span>
+    <div class="slide__inner">
+      <h1 class="slide__title"><span class="accent">经济学</span> 视角</h1>
+      <p class="slide__subtitle">The Lens of Economics · Deck 02 of 06</p>
+      <p class="slide__subtitle" style="margin-top: 1.5rem; color: var(--t-text-faint); font-size: 0.9rem; max-width: 640px;">
+        从供需、交易、成本、激励的角度看<br>Agent 时代的"微技能市场"。
+      </p>
+      <div class="slide__meta">
+        <span>Zero · 2026</span>
+        <span>Vol.I · Lenses</span>
+        <span>10 Slides</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Slide 2: Skill ================= -->
+  <section class="slide">
+    <div class="slide__inner">
+      <div class="slide__header">
+        <div class="slide__eyebrow">Object · 看清对象</div>
+        <h2 class="slide__title">Skill 是什么 —— <em style="color:var(--t-magenta)">一种商品</em></h2>
+      </div>
+      <div class="slide__body">
+        <p>Skill(技能)在 Claude 的体系里是一段带 schema 的提示词 + 工具声明 + 调用入口,
+          在 GPT 的体系里是一份 <code>instructions.md</code> + 一组 <code>tools</code>,
+          在 MCP 里是一段对外暴露的服务描述。</p>
+        <p>但<strong>从经济学的视角看,Skill 是一种商品</strong> —— 它有作者、有买家、有价格、有被淘汰的宿命。</p>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem;">
+          <div style="padding: 1rem; background: var(--t-bg-soft); border: 1px solid var(--t-line); border-top: 3px solid var(--t-cyan);">
+            <div style="font-family: var(--t-mono); font-size: 0.7rem; letter-spacing: 0.25em; color: var(--t-cyan); text-transform: uppercase;">// Anthropic</div>
+            <div style="margin-top: 0.5rem; font-family: var(--t-mono); font-size: 0.9rem;">prompt + tools + entry</div>
+          </div>
+          <div style="padding: 1rem; background: var(--t-bg-soft); border: 1px solid var(--t-line); border-top: 3px solid var(--t-magenta);">
+            <div style="font-family: var(--t-mono); font-size: 0.7rem; letter-spacing: 0.25em; color: var(--t-magenta); text-transform: uppercase;">// OpenAI</div>
+            <div style="margin-top: 0.5rem; font-family: var(--t-mono); font-size: 0.9rem;">instructions.md + tools</div>
+          </div>
+          <div style="padding: 1rem; background: var(--t-bg-soft); border: 1px solid var(--t-line); border-top: 3px solid var(--t-lime);">
+            <div style="font-family: var(--t-mono); font-size: 0.7rem; letter-spacing: 0.25em; color: var(--t-lime); text-transform: uppercase;">// MCP</div>
+            <div style="margin-top: 0.5rem; font-family: var(--t-mono); font-size: 0.9rem;">exposed service + schema</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Slide 3: Supply side ================= -->
+  <section class="slide slide--quote">
+    <div class="slide__inner">
+      <div class="quote-mark">"</div>
+      <blockquote>
+        Skill 的供给曲线有一个奇怪的特点:<br>
+        <span style="color:var(--t-cyan); text-shadow:0 0 30px rgba(0,240,255,0.5);">接近零边际成本</span>。
+      </blockquote>
+      <p class="cite">— Supply Side · 自然垄断的候选</p>
+      <p style="margin-top: 2.5rem; font-size: 1rem; color: var(--t-text-soft); max-width: 720px; text-align: center; line-height: 1.7;">
+        写一份 Skill,前几个小时沉没成本高,但复用一万次,作者每多卖一份的成本几乎为零。
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= Slide 4: Demand side - Compare ================= -->
+  <section class="slide slide--compare">
+    <div class="slide__inner">
+      <div class="slide__header">
+        <div class="slide__eyebrow">Demand · 需求侧三层</div>
+        <h2 class="slide__title">需求分层裂开</h2>
+      </div>
+      <div class="compare-grid">
+        <div class="compare-card">
+          <h3>// L1 · to-C 尝鲜层</h3>
+          <p>随便试一下,粘性极低。</p>
+          <p style="color: var(--t-cyan); margin-top: 0.8rem; font-family: var(--t-mono); font-size: 0.9rem;">价格弹性: 极高</p>
+        </div>
+        <div class="compare-card mag">
+          <h3>// L2 · to-P 提效层</h3>
+          <p>把 Skill 嵌进工作流,愿意为省时间付钱。</p>
+          <p style="color: var(--t-magenta); margin-top: 0.8rem; font-family: var(--t-mono); font-size: 0.9rem;">在意 ROI</p>
+        </div>
+        <div class="compare-card lime">
+          <h3>// L3 · to-B 系统层</h3>
+          <p>Skill 是组织内部"角色卡片",被采购、被治理。</p>
+          <p style="color: var(--t-lime); margin-top: 0.8rem; font-family: var(--t-mono); font-size: 0.9rem;">在意合规</p>
+        </div>
+        <div class="compare-card amber">
+          <h3>// 关键洞察</h3>
+          <p>三层完全不同的人在想,他们的"价格弹性"差异巨大。</p>
+          <p style="margin-top: 0.8rem; font-family: var(--t-mono); font-size: 0.9rem; color: var(--t-text-soft);">
+            一份 Skill 同时卖三层?几乎不可能。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Slide 5: Mechanism - incentive ================= -->
+  <section class="slide slide--diagram">
+    <div class="slide__inner">
+      <div class="slide__header">
+        <div class="slide__eyebrow">Mechanism · 激励机制反转</div>
+        <h2 class="slide__title">声望的<em style="color:var(--t-magenta)">捕获机制</em>被改写</h2>
+      </div>
+      <div class="diagram">
+        <div class="diagram-row">
+          <span class="diagram-node">写 Skill</span>
+          <span class="diagram-arrow">→</span>
+          <span class="diagram-node lime">被 50k 工作流嵌入</span>
+          <span class="diagram-arrow">→</span>
+          <span class="diagram-node mag">作者一无所知</span>
+        </div>
+        <div class="diagram-row" style="margin-top: 1.2rem;">
+          <span class="diagram-node">?</span>
+          <span class="diagram-arrow">→</span>
+          <span class="diagram-node amber">没有 download / star / cite</span>
+          <span class="diagram-arrow">→</span>
+          <span class="diagram-node amber">回报在哪里?</span>
+        </div>
+      </div>
+      <p style="margin-top: 2.5rem; font-family: var(--t-mono); color: var(--t-cyan); border-left: 3px solid var(--t-cyan); padding-left: 1rem; font-size: 1rem;">
+        没有可见的回报,谁还愿意把最好的版本公开出来?<br>
+        <span style="color: var(--t-magenta);">这是 Skill 经济的根本性未解问题。</span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= Slide 6: Platform tax ================= -->
+  <section class="slide slide--stats">
+    <div class="slide__inner">
+      <div class="slide__header">
+        <div class="slide__eyebrow">Platform Tax · 平台税</div>
+        <h2 class="slide__title">每一次调用,平台都<em style="color:var(--t-magenta)">有权抽成</em></h2>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="value">App<br>Store</div>
+          <div class="label">2010 参照系</div>
+          <div class="note">Apple 与开发者的财富分配战</div>
+        </div>
+        <div class="stat-card mag">
+          <div class="value">Skill<br>Market</div>
+          <div class="label">2026+ 参照系</div>
+          <div class="note">平台的"发现机制"比 App Store 更模糊</div>
+        </div>
+        <div class="stat-card lime">
+          <div class="value">更<br>集中</div>
+          <div class="label">权力结构</div>
+          <div class="note">没有替代品 → 平台权力比 Apple 当年还强</div>
+        </div>
+        <div class="stat-card amber">
+          <div class="value">舆论<br>战</div>
+          <div class="label">未来 3 年</div>
+          <div class="note">"平台税"会成为 Agent 时代的财富分配之战</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= Slide 7: Key points - bullets ================= -->
+  <section class="slide slide--bullets">
+    <div class="slide__inner">
+      <div class="slide__header">
+        <div class="slide__eyebrow">Key Points · 三件非显然的事</div>
+        <h2 class="slide__title">关于 Skill 经济</h2>
+      </div>
+      <ul class="bullet-list">
+        <li>
+          <div class="num">01</div>
+          <div>
+            <div class="title"><em style="color:var(--t-magenta)">零边际成本</em> ≠ 零价值</div>
+            <div class="desc">一份 Skill 的稀缺资源不是"再次使用"的成本,而是"作者时间"和"信用" —— 这两件事都不是无限可复制的。</div>
+          </div>
+        </li>
+        <li>
+          <div class="num">02</div>
+          <div>
+            <div class="title"><em style="color:var(--t-magenta)">to-C / to-P / to-B</em> 是三种产品</div>
+            <div class="desc">同一份 Skill 想打通三层,几乎一定失败。版本必须分裂,定位必须切割。</div>
+          </div>
+        </li>
+        <li>
+          <div class="num">03</div>
+          <div>
+            <div class="title">"<em style="color:var(--t-magenta)">被用</em>"与"<em style="color:var(--t-magenta)">被看见</em>"已脱钩</div>
+            <div class="desc">一个 Skill 装进 5 万个工作流,作者可能完全不知道 —— 传统的 star / download 反馈环失效了。</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ================= Slide 8: Limitation ================= -->
+  <section class="slide slide--compare">
+    <div class="slide__inner">
+      <div class="slide__header">
+        <div class="slide__eyebrow">Limit · 这副镜片的盲区</div>
+        <h2 class="slide__title">经济学看不到什么</h2>
+      </div>
+      <div class="compare-grid">
+        <div class="compare-card">
+          <h3>// 它擅长看的</h3>
+          <ul>
+            <li>供需、激励、抽成、替代、互补</li>
+            <li>平台与创作者的博弈</li>
+            <li>需求分层与价格弹性</li>
+          </ul>
+        </div>
+        <div class="compare-card mag">
+          <h3>// 它看不到的</h3>
+          <ul>
+            <li>作者为什么写 —— 动机不仅是钱</li>
+            <li>Skill 的"语义价值"如何定价</li>
+            <li>信任、信用、声誉这些"非货币变量"</li>
+          </ul>
+        </div>
+      </div>
+      <p style="margin-top: 2rem; font-family: var(--t-mono); font-size: 0.95rem; color: var(--t-cyan); text-align: center;">
+        经济学 + 关系视角 + 制度视角,合用才完整。
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= Slide 9: Judgment ================= -->
+  <section class="slide slide--statement">
+    <div class="slide__inner">
+      <div class="slide__header" style="margin-bottom: 1.5rem;">
+        <div class="slide__eyebrow">Judgment · 一个判断</div>
+      </div>
+      <p class="statement" style="font-size: clamp(1.6rem, 3vw, 2.4rem);">
+        我赌:Skill 不会像 App 一样<br>
+        爆炸成"<span class="hl-cyan">千亿市场</span>"。
+      </p>
+      <p class="statement" style="font-size: clamp(1.4rem, 2.6vw, 2rem); margin-top: 2rem; color: var(--t-text-soft);">
+        它更可能像<span class="hl-mag">Linux 包管理</span>——<br>
+        重要但不性感,被少数人维护,被多数人白嫖。
+      </p>
+      <p class="statement" style="font-size: clamp(1.2rem, 2.2vw, 1.6rem); margin-top: 2rem;">
+        真正赚钱的,不是 Skill 本身,<br>
+        而是 Skill <span class="hl-lime">嵌入的工作流</span>。
+      </p>
+    </div>
+  </section>
+
+  <!-- ================= Slide 10: Outro ================= -->
+  <section class="slide slide--outro">
+    <div class="slide__inner">
+      <div class="thanks">END · DECK 02</div>
+      <p class="signoff">经济学视角 · 第一卷 · 第二章</p>
+      <p style="margin-top: 2.5rem; font-family: var(--t-mono); color: var(--t-text-soft); font-size: 0.95rem; letter-spacing: 0.1em;">
+        下一个镜片: <a href="03-program.html" style="color: var(--t-cyan); border-bottom: 1px dotted var(--t-cyan);">程序视角 →</a>
+      </p>
+      <div class="nav-hint">
+        <kbd>←</kbd> <kbd>→</kbd> 翻页 · <a href="index.html" style="color: var(--t-magenta); border-bottom: 1px dotted var(--t-magenta);">回到索引</a>
+      </div>
+    </div>
+  </section>
+
+  <nav class="deck-nav">
+    <div class="deck-nav__btns">
+      <button class="deck-nav__btn" data-nav="first" disabled>« First</button>
+      <button class="deck-nav__btn" data-nav="prev" disabled>‹ Prev</button>
+    </div>
+    <div class="deck-nav__hint"><kbd>←</kbd> <kbd>→</kbd> <kbd>Space</kbd> 翻页</div>
+    <div class="deck-nav__btns">
+      <button class="deck-nav__btn" data-nav="next">Next ›</button>
+      <button class="deck-nav__btn" data-nav="last">Last »</button>
+    </div>
+  </nav>
+
+</div>
+
+<script src="assets/js/deck.js" defer></script>
+</body>
+</html>
