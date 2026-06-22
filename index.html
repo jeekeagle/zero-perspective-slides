@@ -3,212 +3,203 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>《视角》幻灯片集 · Zero-Perspective-Slides</title>
-  <meta name="description" content="六个视角的 HTML 幻灯片 —— 键盘翻页,深空科技风。" />
+  <title>视角 · Perspectives Slides</title>
+  <meta name="description" content="六个视角的 HTML 幻灯片 —— 多卷书式目录,深空科技风。" />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%230a0e1a'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-family='monospace' font-size='32' font-weight='700' fill='%2300f0ff'%3EP%3C/text%3E%3C/svg%3E" />
   <link rel="stylesheet" href="assets/css/style-tech.css" />
-  <style>
-    /* index 单独 layout(不是 deck) */
-    body { overflow: auto; user-select: text; }
-    .index-page {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 4rem 2rem 6rem;
-    }
-    .index-hero {
-      text-align: center;
-      padding: 3rem 0 4rem;
-      border-bottom: 1px solid var(--t-line);
-      margin-bottom: 3rem;
-    }
-    .index-hero .label {
-      font-family: var(--t-mono);
-      font-size: 0.8rem;
-      letter-spacing: 0.4em;
-      text-transform: uppercase;
-      color: var(--t-magenta);
-      margin-bottom: 1.2rem;
-    }
-    .index-hero h1 {
-      font-family: var(--t-display);
-      font-size: clamp(2.4rem, 5vw, 4rem);
-      font-weight: 700;
-      margin: 0 0 1rem;
-      letter-spacing: -0.02em;
-      background: linear-gradient(90deg, var(--t-cyan), var(--t-magenta));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-    .index-hero p {
-      font-size: 1.15rem;
-      color: var(--t-text-soft);
-      max-width: 640px;
-      margin: 0 auto;
-      line-height: 1.7;
-    }
-    .index-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 1.4rem;
-      margin-top: 1rem;
-    }
-    .deck-card {
-      display: block;
-      padding: 1.8rem 1.6rem;
-      background: var(--t-bg-soft);
-      border: 1px solid var(--t-line);
-      border-left: 3px solid var(--t-cyan);
-      border-radius: 4px;
-      color: var(--t-text);
-      transition: all 0.3s ease;
-      text-decoration: none;
-      user-select: none;
-    }
-    .deck-card:hover {
-      border-left-color: var(--t-magenta);
-      background: var(--t-panel);
-      transform: translateY(-3px);
-      box-shadow: 0 10px 30px rgba(0,240,255,0.1);
-    }
-    .deck-card .num {
-      font-family: var(--t-mono);
-      font-size: 0.75rem;
-      letter-spacing: 0.3em;
-      color: var(--t-cyan);
-      text-transform: uppercase;
-      margin-bottom: 0.6rem;
-    }
-    .deck-card .name {
-      font-family: var(--t-display);
-      font-size: 1.4rem;
-      font-weight: 600;
-      margin-bottom: 0.4rem;
-      color: var(--t-text);
-    }
-    .deck-card .name em {
-      font-style: normal;
-      color: var(--t-magenta);
-    }
-    .deck-card .desc {
-      font-size: 0.92rem;
-      color: var(--t-text-soft);
-      line-height: 1.65;
-      margin-bottom: 1rem;
-    }
-    .deck-card .meta {
-      display: flex;
-      gap: 1rem;
-      font-family: var(--t-mono);
-      font-size: 0.7rem;
-      color: var(--t-text-faint);
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-    }
-    .deck-card .meta .enter {
-      color: var(--t-cyan);
-    }
-    .index-foot {
-      margin-top: 4rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--t-line);
-      text-align: center;
-      font-family: var(--t-mono);
-      font-size: 0.78rem;
-      color: var(--t-text-faint);
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-    }
-    .index-foot kbd {
-      display: inline-block;
-      padding: 0.15em 0.5em;
-      background: var(--t-panel);
-      border: 1px solid var(--t-line);
-      border-radius: 3px;
-      font-family: var(--t-mono);
-      font-size: 0.9em;
-      color: var(--t-cyan);
-      margin: 0 0.15em;
-    }
-  </style>
 </head>
-<body>
+<body class="index-body">
 
 <div class="index-page">
 
+  <!-- ============== Hero ============== -->
   <header class="index-hero">
-    <div class="label">// zero-perspective-slides · HTML PPT</div>
-    <h1>视 角 · Perspectives</h1>
-    <p>六个镜片,六份独立幻灯片。深空底色 + 霓虹辉光 + 终端字,键盘翻页,深得屏幕友好。</p>
+    <div class="index-hero__inner">
+      <div class="index-hero__mark">Zero Lab · MMXXVI · HTML PPT</div>
+      <h1><span class="accent">视 角</span></h1>
+      <div class="index-hero__en">// Six Lenses · Six Decks · One Stack</div>
+      <p class="index-hero__lede">
+        六副镜片,六份独立 HTML 幻灯片。
+        深空底色 + 霓虹辉光 + 终端字,键盘翻页,
+        屏幕友好,GitHub Pages 即可托管。
+      </p>
+      <div class="index-hero__stats">
+        <div class="stat"><span class="v">06</span><span class="l">Decks</span></div>
+        <div class="stat"><span class="v mag">60</span><span class="l">Slides</span></div>
+        <div class="stat"><span class="v lime">02</span><span class="l">Volumes</span></div>
+        <div class="stat"><span class="v">≈ 60m</span><span class="l">Reading</span></div>
+      </div>
+    </div>
   </header>
 
-  <div class="index-grid">
+  <!-- ============== Volume I · 镜片 ============== -->
+  <section class="index-vol">
+    <div class="index-vol__head">
+      <span class="index-vol__num">Volume I · 镜片</span>
+      <span class="index-vol__zh">第一卷</span>
+      <span class="index-vol__title">Six Lenses</span>
+      <span class="index-vol__meta">6 / 6 Decks Ready</span>
+    </div>
 
-    <a class="deck-card" href="01-taxonomy.html">
-      <div class="num">› Deck 01 / 06</div>
-      <div class="name"><em>分类学</em> 视角</div>
-      <div class="desc">分类不是描述事物的秩序,而是规定事物的秩序。每一次切分,都既是简化,也是遮蔽。</div>
-      <div class="meta">
-        <span>~10 slides</span>
-        <span class="enter">Open ›</span>
+    <div class="lens-grid">
+
+      <a class="lens-card" href="01-taxonomy.html">
+        <div class="lens-card__head">
+          <span class="lens-card__num">› Deck 01 / 06</span>
+          <span class="lens-card__status ready">Ready</span>
+        </div>
+        <h3 class="lens-card__title"><em>分类学</em>视角</h3>
+        <div class="lens-card__en">The Lens of Taxonomy</div>
+        <p class="lens-card__desc">分类不是描述事物的秩序,而是规定事物的秩序。每一次切分,都既是简化,也是遮蔽。</p>
+        <div class="lens-card__foot">
+          <span class="lens-card__slides">10 Slides</span>
+          <span class="lens-card__open">OPEN ›</span>
+        </div>
+      </a>
+
+      <a class="lens-card" href="02-economics.html">
+        <div class="lens-card__head">
+          <span class="lens-card__num">› Deck 02 / 06</span>
+          <span class="lens-card__status ready">Ready</span>
+        </div>
+        <h3 class="lens-card__title"><em>经济学</em>视角</h3>
+        <div class="lens-card__en">The Lens of Economics</div>
+        <p class="lens-card__desc">Skill 的零边际成本、需求分层、平台抽成 —— 看清 Agent 时代的"微技能市场"。</p>
+        <div class="lens-card__foot">
+          <span class="lens-card__slides">10 Slides</span>
+          <span class="lens-card__open">OPEN ›</span>
+        </div>
+      </a>
+
+      <a class="lens-card" href="03-program.html">
+        <div class="lens-card__head">
+          <span class="lens-card__num">› Deck 03 / 06</span>
+          <span class="lens-card__status ready">Ready</span>
+        </div>
+        <h3 class="lens-card__title"><em>程序</em>视角</h3>
+        <div class="lens-card__en">The Lens of Program</div>
+        <p class="lens-card__desc">提示词当作源码:类型、模块、版本、测试 —— 一种运行在大模型上的 DSL。</p>
+        <div class="lens-card__foot">
+          <span class="lens-card__slides">10 Slides</span>
+          <span class="lens-card__open">OPEN ›</span>
+        </div>
+      </a>
+
+      <a class="lens-card" href="04-topology.html">
+        <div class="lens-card__head">
+          <span class="lens-card__num">› Deck 04 / 06</span>
+          <span class="lens-card__status ready">Ready</span>
+        </div>
+        <h3 class="lens-card__title"><em>拓扑学</em>视角</h3>
+        <div class="lens-card__en">The Lens of Topology</div>
+        <p class="lens-card__desc">把 Agent 协作画成图:Pipeline / Fan-out / Hub / Mesh / Loop —— 拓扑决定性质。</p>
+        <div class="lens-card__foot">
+          <span class="lens-card__slides">10 Slides</span>
+          <span class="lens-card__open">OPEN ›</span>
+        </div>
+      </a>
+
+      <a class="lens-card" href="05-relation.html">
+        <div class="lens-card__head">
+          <span class="lens-card__num">› Deck 05 / 06</span>
+          <span class="lens-card__status ready">Ready</span>
+        </div>
+        <h3 class="lens-card__title"><em>关系</em>视角</h3>
+        <div class="lens-card__en">The Lens of Relation</div>
+        <p class="lens-card__desc">从工具-使用者到同事-同事:信任的尺度、新型心理问题、Agent 时代的软实力。</p>
+        <div class="lens-card__foot">
+          <span class="lens-card__slides">10 Slides</span>
+          <span class="lens-card__open">OPEN ›</span>
+        </div>
+      </a>
+
+      <a class="lens-card" href="06-architecture.html">
+        <div class="lens-card__head">
+          <span class="lens-card__num">› Deck 06 / 06</span>
+          <span class="lens-card__status ready">Ready</span>
+        </div>
+        <h3 class="lens-card__title"><em>架构</em>视角</h3>
+        <div class="lens-card__en">The Lens of Architecture</div>
+        <p class="lens-card__desc">RAG 让知识从参数化变成"按需加载":引用、可追溯、可治理 —— 但它没改变模型上限。</p>
+        <div class="lens-card__foot">
+          <span class="lens-card__slides">10 Slides</span>
+          <span class="lens-card__open">OPEN ›</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ============== Volume II · 方法 ============== -->
+  <section class="index-vol">
+    <div class="index-vol__head">
+      <span class="index-vol__num mag">Volume II · 方法</span>
+      <span class="index-vol__zh">第二卷</span>
+      <span class="index-vol__title">Two Tools</span>
+      <span class="index-vol__meta">0 / 2 Decks · In Preparation</span>
+    </div>
+
+    <div class="lens-grid">
+      <div class="lens-card lens-card--placeholder">
+        <div class="lens-card__head">
+          <span class="lens-card__num">› Deck M1</span>
+          <span class="lens-card__status prep">In Prep</span>
+        </div>
+        <h3 class="lens-card__title">锻造<em>法</em></h3>
+        <div class="lens-card__en">Method · Forging</div>
+        <p class="lens-card__desc">怎么从经验里提炼出可复用的视角 —— 镜片是怎么被造出来的。从具体观察、跨案例对比、到抽象结构。</p>
+        <div class="lens-card__foot">
+          <span class="lens-card__slides">~ 10 Slides</span>
+          <span class="lens-card__open">COMING ›</span>
+        </div>
       </div>
-    </a>
 
-    <a class="deck-card" href="02-economics.html">
-      <div class="num">› Deck 02 / 06</div>
-      <div class="name"><em>经济学</em> 视角</div>
-      <div class="desc">Skill 的零边际成本、需求分层、平台抽成 —— 看清 Agent 时代的"微技能市场"。</div>
-      <div class="meta">
-        <span>~10 slides</span>
-        <span class="enter">Open ›</span>
+      <div class="lens-card lens-card--placeholder">
+        <div class="lens-card__head">
+          <span class="lens-card__num">› Deck M2</span>
+          <span class="lens-card__status prep">In Prep</span>
+        </div>
+        <h3 class="lens-card__title">检验<em>法</em></h3>
+        <div class="lens-card__en">Method · Verification</div>
+        <p class="lens-card__desc">怎么知道这副镜片有没有用 —— 用三段式检验去证伪一个视角:预测、反例、可解释性。</p>
+        <div class="lens-card__foot">
+          <span class="lens-card__slides">~ 10 Slides</span>
+          <span class="lens-card__open">COMING ›</span>
+        </div>
       </div>
-    </a>
+    </div>
+  </section>
 
-    <a class="deck-card" href="03-program.html">
-      <div class="num">› Deck 03 / 06</div>
-      <div class="name"><em>程序</em> 视角</div>
-      <div class="desc">提示词当作源码:类型、模块、版本、测试 —— 一种运行在大模型上的 DSL。</div>
-      <div class="meta">
-        <span>~10 slides</span>
-        <span class="enter">Open ›</span>
-      </div>
-    </a>
+  <!-- ============== Appendix · 附录 ============== -->
+  <section class="index-vol">
+    <div class="index-vol__head">
+      <span class="index-vol__num amber">Appendix · 附录</span>
+      <span class="index-vol__title">Meta & Links</span>
+      <span class="index-vol__meta">外部链接</span>
+    </div>
+    <ul class="apx-list">
+      <li><a href="https://github.com/jeekeagle/zero-perspective-slides" target="_blank" rel="noopener noreferrer">
+        <span class="arrow">↗</span> GitHub · 仓库源代码
+      </a></li>
+      <li><a href="https://jeekeagle.github.io/zero-perspective-book/" target="_blank" rel="noopener noreferrer">
+        <span class="arrow">↗</span> Book · 文字版(同源不同面)
+      </a></li>
+      <li><a href="https://jeekeagle.github.io/zero-perspective-hub/" target="_blank" rel="noopener noreferrer">
+        <span class="arrow">↗</span> Hub · 镜片研究中心
+      </a></li>
+    </ul>
+  </section>
 
-    <a class="deck-card" href="04-topology.html">
-      <div class="num">› Deck 04 / 06</div>
-      <div class="name"><em>拓扑学</em> 视角</div>
-      <div class="desc">把 Agent 协作画成图:Pipeline / Fan-out / Hub / Mesh / Loop —— 拓扑决定性质。</div>
-      <div class="meta">
-        <span>~10 slides</span>
-        <span class="enter">Open ›</span>
-      </div>
-    </a>
-
-    <a class="deck-card" href="05-relation.html">
-      <div class="num">› Deck 05 / 06</div>
-      <div class="name"><em>关系</em> 视角</div>
-      <div class="desc">从工具-使用者到同事-同事:信任的尺度、新型心理问题、Agent 时代的软实力。</div>
-      <div class="meta">
-        <span>~10 slides</span>
-        <span class="enter">Open ›</span>
-      </div>
-    </a>
-
-    <a class="deck-card" href="06-architecture.html">
-      <div class="num">› Deck 06 / 06</div>
-      <div class="name"><em>架构</em> 视角</div>
-      <div class="desc">RAG 让知识从参数化变成"按需加载":引用、可追溯、可治理 —— 但它没改变模型上限。</div>
-      <div class="meta">
-        <span>~10 slides</span>
-        <span class="enter">Open ›</span>
-      </div>
-    </a>
-
-  </div>
-
-  <div class="index-foot">
-    Tip · 进入任意 deck 后用 <kbd>←</kbd> <kbd>→</kbd> <kbd>Space</kbd> 翻页 · <kbd>Home</kbd> <kbd>End</kbd> 跳首尾
-  </div>
+  <!-- ============== Tip ============== -->
+  <footer class="index-foot">
+    <div>Tip · 进入任意 deck 后用 <kbd>←</kbd> <kbd>→</kbd> <kbd>Space</kbd> 翻页 · <kbd>Home</kbd> <kbd>End</kbd> 跳首尾</div>
+    <div class="glyphs">
+      <span><span class="dot" style="background: var(--t-cyan); box-shadow: var(--t-glow);"></span>Cyan · 主色</span>
+      <span><span class="dot" style="background: var(--t-magenta); box-shadow: var(--t-glow-mag);"></span>Magenta · 强调</span>
+      <span><span class="dot" style="background: var(--t-lime);"></span>Lime · 警示</span>
+      <span><span class="dot" style="background: var(--t-amber);"></span>Amber · 提示</span>
+    </div>
+  </footer>
 
 </div>
 

@@ -1,8 +1,9 @@
 /* ============================================================
-   Zero-Perspective-Slides · 翻页控制器
-   - 键盘:← → Space Home End
+   Zero-Perspective-Slides · 翻页控制器 + TOC 抽屉
+   - 键盘:← → Space Home End / Esc 关抽屉
    - 触屏:左右滑动
    - 按钮:底部 next / prev / first / last
+   - 抽屉:左上 ⌘ 按钮或键盘 M / Tab 键打开
    - URL hash 同步(可选)
    ============================================================ */
 
@@ -43,8 +44,35 @@
   function first() { go(0); }
   function last() { go(total - 1); }
 
+  // ---------- TOC 抽屉 ----------
+  const tocPanel = document.querySelector('.deck-toc');
+  const tocMask = document.querySelector('.deck-toc-mask');
+  const tocBtn = document.querySelector('[data-toc-toggle]');
+  const tocClose = document.querySelector('.deck-toc__close');
+
+  function tocOpen() {
+    if (tocPanel) tocPanel.classList.add('open');
+    if (tocMask) tocMask.classList.add('open');
+  }
+  function tocCloseFn() {
+    if (tocPanel) tocPanel.classList.remove('open');
+    if (tocMask) tocMask.classList.remove('open');
+  }
+  if (tocBtn) tocBtn.addEventListener('click', tocOpen);
+  if (tocClose) tocClose.addEventListener('click', tocCloseFn);
+  if (tocMask) tocMask.addEventListener('click', tocCloseFn);
+
   // ---------- 键盘 ----------
   document.addEventListener('keydown', (e) => {
+    // 抽屉打开时,Esc 关闭
+    if (e.key === 'Escape' && tocPanel && tocPanel.classList.contains('open')) {
+      e.preventDefault();
+      tocCloseFn();
+      return;
+    }
+    // 抽屉打开时,拦截翻页键
+    if (tocPanel && tocPanel.classList.contains('open')) return;
+
     switch (e.key) {
       case 'ArrowRight':
       case 'PageDown':
@@ -57,6 +85,9 @@
         e.preventDefault(); first(); break;
       case 'End':
         e.preventDefault(); last(); break;
+      case 'm':
+      case 'M':
+        e.preventDefault(); tocOpen(); break;
     }
   });
 

@@ -10,10 +10,51 @@
 </head>
 <body>
 
+<!-- TOC 抽屉 -->
+<aside class="deck-toc" aria-label="幻灯片目录">
+  <button class="deck-toc__close" aria-label="关闭">✕</button>
+  <div class="deck-toc__brand">
+    <span class="dot"></span>
+    <span class="name">视角 · 目录</span>
+    <span class="tag">Index</span>
+  </div>
+
+  <div class="deck-toc__group">
+    <div class="deck-toc__group-label">Volume I · 镜片</div>
+    <ul class="deck-toc__list">
+      <li><a href="01-taxonomy.html" class="active"><span class="num">I</span><span class="name">分类学视角</span><span class="meta">10p</span></a></li>
+      <li><a href="02-economics.html"><span class="num">II</span><span class="name">经济学视角</span><span class="meta">10p</span></a></li>
+      <li><a href="03-program.html"><span class="num">III</span><span class="name">程序视角</span><span class="meta">10p</span></a></li>
+      <li><a href="04-topology.html"><span class="num">IV</span><span class="name">拓扑学视角</span><span class="meta">10p</span></a></li>
+      <li><a href="05-relation.html"><span class="num">V</span><span class="name">关系视角</span><span class="meta">10p</span></a></li>
+      <li><a href="06-architecture.html"><span class="num">VI</span><span class="name">架构视角</span><span class="meta">10p</span></a></li>
+    </ul>
+  </div>
+
+  <div class="deck-toc__group">
+    <div class="deck-toc__group-label amber">Appendix</div>
+    <ul class="deck-toc__list">
+      <li><a href="index.html"><span class="num">⌂</span><span class="name">返回首页</span><span class="meta">↗</span></a></li>
+      <li><a href="https://jeekeagle.github.io/zero-perspective-book/" target="_blank" rel="noopener noreferrer"><span class="num">B</span><span class="name">Book · 文字版</span><span class="meta">↗</span></a></li>
+      <li><a href="https://github.com/jeekeagle/zero-perspective-slides" target="_blank" rel="noopener noreferrer"><span class="num">G</span><span class="name">GitHub 仓库</span><span class="meta">↗</span></a></li>
+    </ul>
+  </div>
+
+  <div class="deck-toc__hint">
+    <kbd>M</kbd> 打开目录 · <kbd>Esc</kbd> 关闭<br>
+    <kbd>←</kbd> <kbd>→</kbd> <kbd>Space</kbd> 翻页
+  </div>
+</aside>
+<div class="deck-toc-mask" aria-hidden="true"></div>
+
 <div class="deck">
 
   <!-- 顶部状态栏 -->
   <header class="deck-topbar">
+      <button class="deck-topbar__menu" data-toc-toggle type="button" aria-label="打开目录">
+        <span class="glyph"><span></span></span>
+        <span>Index</span>
+      </button>
     <div class="deck-topbar__brand">
       <span class="dot"></span>
       <span>Perspectives / Deck 01</span>
